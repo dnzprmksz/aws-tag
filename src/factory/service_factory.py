@@ -3,6 +3,7 @@ from src.core.aws.base_aws_service import BaseAwsService
 from src.core.aws.cloudwatch_logs import CloudWatchLogs
 from src.core.aws.dynamodb import DynamoDB
 from src.core.aws.ec2 import EC2
+from src.core.aws.ecr import ECR
 from src.core.aws.elastic_block_store import ElasticBlockStore
 from src.core.aws.elasticache import ElastiCache
 from src.core.aws.kinesis_data_analytics import KinesisDataAnalytics
@@ -33,6 +34,7 @@ class ServiceFactory:
         ElastiCache(),
         ElasticBlockStore(),
         SNS(),
+        ECR(),
     ]
 
     services = {service.short_name: service for service in __services}

@@ -11,23 +11,24 @@ Services are selected using the `--service` flag. The following services are cur
 --service <service-parameter>
 ```
 
-| Service               | Parameter   |
-| --------------------- | ----------- |
-| API Gateway           | agw         |
-| DynamoDB              | dynamodb    |
-| Elastic Block Store   | ebs         |
-| EC2                   | ec2         |
-| ElastiCache           | elasticache |
-| Kinesis Data Analytics| kda         |
-| Kinesis Data Firehose | kdf         |
-| Kinesis Data Stream   | kds         |
-| KMS                   | kms         |
-| Lambda                | lambda      |
-| CloudWatch Logs       | logs        |
-| RDS                   | rds         |
-| S3                    | s3          |
-| SNS                   | sns         |
-| SQS                   | sqs         |
+| Service                | Parameter   |
+|------------------------|-------------|
+| API Gateway            | agw         |
+| DynamoDB               | dynamodb    |
+| Elastic Block Store    | ebs         |
+| EC2                    | ec2         |
+| ECR                    | ecr         |
+| ElastiCache            | elasticache |
+| Kinesis Data Analytics | kda         |
+| Kinesis Data Firehose  | kdf         |
+| Kinesis Data Stream    | kds         |
+| KMS                    | kms         |
+| Lambda                 | lambda      |
+| CloudWatch Logs        | logs        |
+| RDS                    | rds         |
+| S3                     | s3          |
+| SNS                    | sns         |
+| SQS                    | sqs         |
 
 ## How to install?
 
