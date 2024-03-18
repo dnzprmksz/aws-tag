@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-tag"
+version = "0.1.1"
+authors = [
+    { name = "Deniz Parmaksız" },
+]
+keywords = ["aws", "tag", "tagging", "tagger"]
+description = "Bulk AWS resource tagging utility."
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "boto3>=1.26.47",
+    "pathvalidate>=2.5.2",
+    "pandas>=1.5.2",
+    "tabulate>=0.9.0",
+]
+dynamic = [
+    "scripts",
+]
+
+[project.urls]
+Homepage = "https://github.com/dnzprmksz/aws-tag"
+Issues = "https://github.com/dnzprmksz/aws-tag/issues"
