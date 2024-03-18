@@ -1,7 +1,28 @@
-# AWS Tagger
+# AWS Tag
 
-Bulk AWS resources tagging utility. This tool is intended to be used to tag AWS resources using a single interface as
-opposed to using the AWS console, CLI or SDK with different API interfaces for each service.
+Bulk AWS resource tagging utility. Tag AWS resources using a single interface with filter support
+to operate on a subset of resources.
+
+## Installation
+
+Install the package using pip. Alternatively, you can also use 
+[pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/), which installs 
+the package in an isolated environment and adds the package to the system path.
+
+```bash
+pip install aws-tag
+```
+
+## Usage
+
+There are four different operations that can be performed using this tool. Each operation (except import) supports
+filtering resources by name and tag values. Read [filters and operators](#filters-and-operators) section for more
+details.
+
+- [List resources](#list-resources)
+- [Tag resources](#tag-resources)
+- [Export tags](#export-tags)
+- [Import tags](#import-tags)
 
 ### Available AWS Services
 
@@ -30,26 +51,6 @@ Services are selected using the `--service` flag. The following services are cur
 | SNS                    | sns         |
 | SQS                    | sqs         |
 
-## How to install?
-
-[Build from source](#development-how-to-build-and-distribute) or download the wheel file for the latest release and
-install it to your system using pip.
-
-```bash
-pip install aws_tagger-py3-none-any.whl
-```
-
-## How to use?
-
-There are four different operations that can be performed using this tool. Each operation (except import) supports
-filtering resources by name and tag values. Read [filters and operators](#filters-and-operators) section for more
-details.
-
-- [List resources](#list-resources)
-- [Tag resources](#tag-resources)
-- [Export tags](#export-tags)
-- [Import tags](#import-tags)
-
 ### Filters and Operators
 
 Filters are used to filter resources by name and tag values. Filters are specified using the following format:
@@ -62,7 +63,7 @@ Keys are the resource name or tag key. For tag keys just use the tag key as key.
 `@name` key. Operators are used to specify the comparison operator. See the table below.
 
 | Operator | Description         |
-| -------- | ------------------- |
+|----------|---------------------|
 | `= `     | Equals              |
 | `!=`     | Not equal           |
 | `~`      | Contains            |
@@ -81,13 +82,13 @@ examples below.
 Find resources that have `team=data` and `environment=production` tags.
 
 ```bash
-aws-tagger list --service dynamodb --filter 'team=data' --filter 'environment=production'
+aws-tag list --service dynamodb --filter 'team=data' --filter 'environment=production'
 ```
 
 Find resources that does not have a `team` tag.
 
 ```bash
-aws-tagger list --service ec2 --filter 'team--'
+aws-tag list --service ec2 --filter 'team--'
 ```
 
 ### Tag Resources
@@ -95,14 +96,14 @@ aws-tagger list --service ec2 --filter 'team--'
 Add `subteam=intelligence` tag for resources that have `team=data` tag and resource name starting with `intel-`.
 
 ```bash
-aws-tagger tag --service kds --filter 'team=data' --filter '@name^intel-' --tag 'subteam=intelligence'
+aws-tag tag --service kds --filter 'team=data' --filter '@name^intel-' --tag 'subteam=intelligence'
 ```
 
 Add `environment=staging` tag for resources that have `team=data` tag and resource name ending
 with `staging`.
 
 ```bash
-aws-tagger tag --service kdf --filter 'team=data' --filter '@name$staging' --tag 'environment=staging'
+aws-tag tag --service kdf --filter 'team=data' --filter '@name$staging' --tag 'environment=staging'
 ```
 
 ### Export Tags
@@ -110,13 +111,13 @@ aws-tagger tag --service kdf --filter 'team=data' --filter '@name$staging' --tag
 Export the tags of the resources that have `team=data` tag to a csv file.
 
 ```bash
-aws-tagger export --service ebs --filter 'team=data' --file tags.csv
+aws-tag export --service ebs --filter 'team=data' --file tags.csv
 ```
 
 Export the `team` and `Name` tags for the resources that have `team=data` tag to a csv file.
 
 ```bash
-aws-tagger export --service ebs --filter 'team=data' --export-tag 'team' --export-tag 'Name' --file tags.csv
+aws-tag export --service ebs --filter 'team=data' --export-tag 'team' --export-tag 'Name' --file tags.csv
 ```
 
 ### Import Tags
@@ -124,17 +125,5 @@ aws-tagger export --service ebs --filter 'team=data' --export-tag 'team' --expor
 Import the tags from a csv file and tag those resources.
 
 ```bash
-aws-tagger import --file tags.csv
+aws-tag import --file tags.csv
 ```
-
-## Development: How to build and distribute?
-
-Use python build tool to package the application. This will create two output files in `dist` directory. The file
-with `.whl` extension is the wheel file and the file with `.tar.gz` extension is the source distribution.
-
-```bash
-python -m build
-```
-
-Distribute the wheel file to install the application. See [How to install?](#how-to-install) section for installation
-instructions.
