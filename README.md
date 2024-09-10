@@ -39,6 +39,9 @@ Services are selected using the `--service` flag. The following services are cur
 | Elastic Block Store    | ebs         |
 | EC2                    | ec2         |
 | ECR                    | ecr         |
+| ECS                    | ecs         |
+| ELB                    | elb         |
+| ELBv2                  | elbv2       |
 | ElastiCache            | elasticache |
 | Kinesis Data Analytics | kda         |
 | Kinesis Data Firehose  | kdf         |

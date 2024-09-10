@@ -4,8 +4,11 @@ from src.core.aws.cloudwatch_logs import CloudWatchLogs
 from src.core.aws.dynamodb import DynamoDB
 from src.core.aws.ec2 import EC2
 from src.core.aws.ecr import ECR
+from src.core.aws.ecs import ECS
 from src.core.aws.elastic_block_store import ElasticBlockStore
 from src.core.aws.elasticache import ElastiCache
+from src.core.aws.elb import ELB
+from src.core.aws.elbv2 import ELBv2
 from src.core.aws.kinesis_data_analytics import KinesisDataAnalytics
 from src.core.aws.kinesis_data_firehose import KinesisDataFirehose
 from src.core.aws.kinesis_data_streams import KinesisDataStreams
@@ -35,6 +38,9 @@ class ServiceFactory:
         ElasticBlockStore(),
         SNS(),
         ECR(),
+        ECS(),
+        ELB(),
+        ELBv2(),
     ]
 
     services = {service.short_name: service for service in __services}
