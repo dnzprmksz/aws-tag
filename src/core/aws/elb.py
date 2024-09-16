@@ -14,6 +14,19 @@ class ELB(BaseAwsService):
         super().__init__(nice_name='ELB', short_name='elb')
         self.client = boto3.client('elb')
 
+    def get_resource(self, resource_name: str) -> Resource:
+        """
+        Get a single resource.
+
+        :param resource_name: Name of the resource.
+        :return: Resource.
+        """
+        response = self.client.describe_load_balancers(LoadBalancerNames=[resource_name])
+        arn = response['LoadBalancerDescriptions'][0]['LoadBalancerName']
+        resource = Resource(name=resource_name, arn=arn)
+
+        return resource
+
     def _list_resources(self, filters: List[Filter]) -> List[Resource]:
         """
         List resources for the service.

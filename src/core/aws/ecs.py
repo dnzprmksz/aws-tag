@@ -14,6 +14,19 @@ class ECS(BaseAwsService):
         super().__init__(nice_name='ECS', short_name='ecs')
         self.client = boto3.client('ecs')
 
+    def get_resource(self, resource_name: str) -> Resource:
+        """
+        Get a single resource.
+
+        :param resource_name: Name of the resource.
+        :return: Resource.
+        """
+        response = self.client.describe_clusters(clusters=[resource_name])
+        arn = response['clusters'][0]['clusterArn']
+        resource = Resource(name=resource_name, arn=arn)
+
+        return resource
+
     def _list_resources(self, filters: List[Filter]) -> List[Resource]:
         """
         List resources for the service.
